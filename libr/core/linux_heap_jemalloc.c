@@ -26,6 +26,7 @@
 #if __linux__
 // TODO: provide proper api in cbin to resolve symbols and load libraries from debug maps and such
 // this is, provide a programmatic api for the slow dmi command
+#if 0
 static GHT GH(je_get_va_symbol)(const char *path, const char *symname) {
 	RListIter *iter;
 	RBinSymbol *s;
@@ -52,6 +53,26 @@ static GHT GH(je_get_va_symbol)(const char *path, const char *symname) {
 		}
 	}
 	r_core_free (core);
+#else
+static GHT GH(je_get_va_symbol)(RCore *core, const char *path, const char *sym_name) {
+	GHT vaddr = GHT_MAX;
+	RBin *bin = core->bin;
+	RBinFile *current_bf = r_bin_cur (bin);
+	RzBinFile *libc_bf = rz_bin_open(bin, path, &opt);
+ 	if (!libc_bf) {
+ 		return vaddr;
+ 	}
+
+ 	RzList *syms = rz_bin_get_symbols(bin);
+ 	rz_list_foreach (syms, iter, s) {
+ 		if (!strcmp(s->name, sym_name)) {
+ 			vaddr = s->vaddr;
+ 			break;
+		}
+	}
+	rz_bin_file_delete(bin, libc_bf);
+ 	rz_bin_file_set_cur_binfile(bin, current_bf);
+#endif
 	return vaddr;
 }
 
