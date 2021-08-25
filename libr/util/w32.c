@@ -6,29 +6,29 @@
 #if __WINDOWS__
 #include <windows.h>
 
-DWORD (*w32_GetProcessImageFileName)(HANDLE,LPSTR,DWORD) = NULL;
-DWORD (*w32_GetModuleBaseName)(HANDLE, HMODULE, LPTSTR, DWORD) = NULL;
-BOOL (*w32_GetModuleInformation)(HANDLE, HMODULE, LPMODULEINFO, DWORD) = NULL;
-BOOL (*w32_DebugActiveProcessStop)(DWORD) = NULL;
-HANDLE (*w32_OpenThread)(DWORD, BOOL, DWORD) = NULL;
-BOOL (*w32_DebugBreakProcess)(HANDLE) = NULL;
-DWORD (*w32_GetThreadId)(HANDLE) = NULL; // Vista
-DWORD (*w32_GetProcessId)(HANDLE) = NULL; // XP
-HANDLE (*w32_OpenProcess)(DWORD, BOOL, DWORD) = NULL;
-BOOL (*w32_QueryFullProcessImageName)(HANDLE, DWORD, LPTSTR, PDWORD) = NULL;
-DWORD (*w32_GetMappedFileName)(HANDLE, LPVOID, LPTSTR, DWORD) = NULL;
-NTSTATUS (*w32_NtQuerySystemInformation)(ULONG, PVOID, ULONG, PULONG) = NULL;
-NTSTATUS (*w32_NtQueryInformationThread)(HANDLE, ULONG, PVOID, ULONG, PULONG) = NULL;
-NTSTATUS (*w32_NtDuplicateObject)(HANDLE, HANDLE, HANDLE, PHANDLE, ACCESS_MASK, ULONG, ULONG) = NULL;
-NTSTATUS (*w32_NtQueryObject)(HANDLE, ULONG, PVOID, ULONG, PULONG) = NULL;
-// fpu access API
-ut64 (*w32_GetEnabledXStateFeatures)(void) = NULL;
-BOOL (*w32_InitializeContext)(PVOID, DWORD, PCONTEXT*, PDWORD) = NULL;
-BOOL (*w32_GetXStateFeaturesMask)(PCONTEXT Context, PDWORD64) = NULL;
-PVOID (*w32_LocateXStateFeature)(PCONTEXT Context, DWORD, PDWORD) = NULL;
-BOOL (*w32_SetXStateFeaturesMask)(PCONTEXT Context, DWORD64) = NULL;
-DWORD (*w32_GetModuleFileNameEx)(HANDLE, HMODULE, LPTSTR, DWORD) = NULL;
-HANDLE (*w32_CreateToolhelp32Snapshot)(DWORD, DWORD) = NULL;
+R_API DWORD (*w32_GetProcessImageFileName)(HANDLE,LPSTR,DWORD) = NULL;
+R_API DWORD (*w32_GetModuleBaseName)(HANDLE, HMODULE, LPTSTR, DWORD) = NULL;
+R_API BOOL (*w32_GetModuleInformation)(HANDLE, HMODULE, LPMODULEINFO, DWORD) = NULL;
+R_API BOOL (*w32_DebugActiveProcessStop)(DWORD) = NULL;
+R_API HANDLE (*w32_OpenThread)(DWORD, BOOL, DWORD) = NULL;
+R_API BOOL (*w32_DebugBreakProcess)(HANDLE) = NULL;
+R_API DWORD (*w32_GetThreadId)(HANDLE) = NULL; // Vista
+R_API DWORD (*w32_GetProcessId)(HANDLE) = NULL; // XP
+R_API HANDLE (*w32_OpenProcess)(DWORD, BOOL, DWORD) = NULL;
+R_API BOOL (*w32_QueryFullProcessImageName)(HANDLE, DWORD, LPTSTR, PDWORD) = NULL;
+R_API DWORD (*w32_GetMappedFileName)(HANDLE, LPVOID, LPTSTR, DWORD) = NULL;
+R_API NTSTATUS (*w32_NtQuerySystemInformation)(ULONG, PVOID, ULONG, PULONG) = NULL;
+R_API NTSTATUS (*w32_NtQueryInformationThread)(HANDLE, ULONG, PVOID, ULONG, PULONG) = NULL;
+R_API NTSTATUS (*w32_NtDuplicateObject)(HANDLE, HANDLE, HANDLE, PHANDLE, ACCESS_MASK, ULONG, ULONG) = NULL;
+R_API NTSTATUS (*w32_NtQueryObject)(HANDLE, ULONG, PVOID, ULONG, PULONG) = NULL;
+R_API // fpu access API
+R_API ut64 (*w32_GetEnabledXStateFeatures)(void) = NULL;
+R_API BOOL (*w32_InitializeContext)(PVOID, DWORD, PCONTEXT*, PDWORD) = NULL;
+R_API BOOL (*w32_GetXStateFeaturesMask)(PCONTEXT Context, PDWORD64) = NULL;
+R_API PVOID (*w32_LocateXStateFeature)(PCONTEXT Context, DWORD, PDWORD) = NULL;
+R_API BOOL (*w32_SetXStateFeaturesMask)(PCONTEXT Context, DWORD64) = NULL;
+R_API DWORD (*w32_GetModuleFileNameEx)(HANDLE, HMODULE, LPTSTR, DWORD) = NULL;
+R_API HANDLE (*w32_CreateToolhelp32Snapshot)(DWORD, DWORD) = NULL;
 
 static bool setup_debug_privileges(bool b) {
 	HANDLE tok;
