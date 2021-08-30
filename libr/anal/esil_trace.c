@@ -352,6 +352,7 @@ static int cmp_strings_by_leading_number(void *data1, void *data2) {
 }
 
 R_API void r_anal_esil_trace_list (RAnalEsil *esil) {
+	r_return_if_fail (esil && esil->trace);
 	PrintfCallback p = esil->anal->cb_printf;
 	SdbKv *kv;
 	SdbListIter *iter;
@@ -364,6 +365,7 @@ R_API void r_anal_esil_trace_list (RAnalEsil *esil) {
 }
 
 R_API void r_anal_esil_trace_show(RAnalEsil *esil, int idx) {
+	r_return_if_fail (esil && esil->trace);
 	PrintfCallback p = esil->anal->cb_printf;
 	const char *str2;
 	const char *str;

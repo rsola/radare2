@@ -4952,7 +4952,7 @@ static int cmd_debug(void *data, const char *input) {
 			} break;
 			case '-': // "dte-"
 				if (!strcmp (input + 3, "*")) {
-					if (core->anal->esil) {
+					if (core->anal->esil && core->anal->esil->trace) {
 						sdb_free (core->anal->esil->trace->db);
 						core->anal->esil->trace->db = sdb_new0 ();
 					}
@@ -4967,10 +4967,12 @@ static int cmd_debug(void *data, const char *input) {
 			} break;
 			case 'k': // "dtek"
 				if (input[3] == ' ') {
-					char *s = sdb_querys (core->anal->esil->trace->db,
-							NULL, 0, input + 4);
-					r_cons_println (s);
-					free (s);
+					if (core->anal->esil && core->anal->esil->trace) {
+						char *s = sdb_querys (core->anal->esil->trace->db,
+								NULL, 0, input + 4);
+						r_cons_println (s);
+						free (s);
+					}
 				} else {
 					eprintf ("Usage: dtek [query]\n");
 				}
