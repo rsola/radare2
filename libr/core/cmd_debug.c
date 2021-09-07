@@ -4923,6 +4923,9 @@ static int cmd_debug(void *data, const char *input) {
 			}
 			break;
 		case 'e': // "dte"
+			if (input[2] == '?') {
+				r_core_cmd_help (core, help_msg_dte);
+			}
 			if (!core->anal->esil) {
 				int stacksize = r_config_get_i (core->config, "esil.stack.depth");
 				int romem = r_config_get_i (core->config, "esil.romem");
