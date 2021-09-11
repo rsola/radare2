@@ -4979,6 +4979,8 @@ static int cmd_debug(void *data, const char *input) {
 								NULL, 0, input + 4);
 						r_cons_println (s);
 						free (s);
+					} else {
+						eprintf("Esil trace is not available; use aets+.\n");
 					}
 				} else {
 					eprintf ("Usage: dtek [query]\n");
