@@ -4940,7 +4940,11 @@ static int cmd_debug(void *data, const char *input) {
 			}
 			switch (input[2]) {
 			case 0: // "dte"
-				r_anal_esil_trace_list (core->anal->esil);
+				if (core->anal->esil && core->anal->esil->trace) {
+					r_anal_esil_trace_list (core->anal->esil);
+				} else {
+					eprintf("Esil trace is not available; use aets+.\n");
+				}
 				break;
 			case 'i': { // "dtei"
 				ut64 addr = r_num_math (core->num, input + 3);
